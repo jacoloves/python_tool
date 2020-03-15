@@ -16,11 +16,11 @@ def main():
             time.sleep(1)
             past_time = past_time+1
 
-            # 59秒になったらmin+1をして、secを初期化
+            # 60秒になったらmin+1をして、secを初期化
             if past_time == 60:
                 sum_minute = sum_minute+1
                 past_time = 0
-                
+
             # 60分になったらhour+1をして、minを初期化
             if sum_minute == 60:
                 sum_hour += sum_hour+1
@@ -44,9 +44,6 @@ def main():
                 str_hour = "0" + str(sum_hour)
             else:
                 str_hour = str(sum_hour)
-
-            # testコード
-            print(f"{str_hour}:{str_minute}:{str_second}")
 
     # ctrl+cを押されたら合計時間を出力する
     except KeyboardInterrupt:
