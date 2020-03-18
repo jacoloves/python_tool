@@ -1,10 +1,14 @@
 
 def main():
-    N, A, B = map(int, input().split())
-    ans = N // (A+B)*A
-    rem = N % (A+B)
-    ans += min(rem, A)
-    print(ans)
+    a, b, c = map(int, input().split())
+    array = [input()]
+    
+    # 多重リスト
+    multi_list = [[input()] for _ in range(a)]
+
+    print(array)
+    print(multi_list)
+
 
 
 if __name__ == "__main__":
