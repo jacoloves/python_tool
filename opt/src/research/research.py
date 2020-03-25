@@ -3,9 +3,10 @@ import sys
 import glob
 
 def research():
-	SEARCH_FILE_NAME = sys.argv[1]
+
 	try:
-		glob.glob()
+		SEARCH_FILE_NAME = sys.argv[1]
+		print(glob.glob(f'./{SEARCH_FILE_NAME}*'))
 
 	except:
 		print("Usage: research.py arg1")
