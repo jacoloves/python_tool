@@ -64,7 +64,7 @@ def main():
         },
     }
 
-    event = service.events().insert(calendarId='https://calendar.google.com/calendar/embed?src=5511068t%40gmail.com&ctz=Asia%2FTokyo', body=event).execute()
+    event = service.events().insert(calendarId='primary', body=event).execute()
     #print "Event created: %s" % (event.get('htmlLink'))
 
 

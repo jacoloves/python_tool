@@ -36,7 +36,7 @@ def main():
     timeto = '2020/12/31'
     timefrom = datetime.datetime.strptime(timefrom, '%Y/%m/%d').isoformat()+'Z'
     timeto = datetime.datetime.strptime(timeto, '%Y/%m/%d').isoformat()+'Z'
-    events_result = service.events().list(calendarId='https://calendar.google.com/calendar/embed?src=5511068t%40gmail.com&ctz=Asia%2FTokyo',
+    events_result = service.events().list(calendarId='primary',
                                         timeMin=timefrom,
                                         timeMax=timeto,
                                         singleEvents=True,
