@@ -1,0 +1,4 @@
+/Users/shotaro/test.mv.db
+/Users/shotaro/tanasho/python_tool/opt/src/research/test_search_result.txt
+/Users/shotaro/tanasho/python_tool/opt/src/research/tes_search_result.txt
+/Users/shotaro/tanasho/python_tool/opt/src/research/test.txt

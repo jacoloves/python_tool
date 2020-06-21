@@ -1,0 +1,3 @@
+/bin
+/Users/shotaro/tanasho/blogs_tanasho
+/Users/shotaro/tanasho/python_tool/opt/src/research/b_search_result.txt
