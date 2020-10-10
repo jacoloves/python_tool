@@ -4,12 +4,12 @@ from apiclient.discovery import build
 from apiclient.errors import HttpError
 from oauth2client.tools import argparser
 
-DEVELOPER_KEY = "REPLACE_ME"
+DEVELOPER_KEY = "APIKey"
 YOUTUBE_API_SERVICE_NAME = "youtube"
 YOUTUBE_API_VERSION = "v3"
 
 def youtube_search(options):
-    yotube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION, developerkey=DEVELOPER_KEY)
+    youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION, developerkey=DEVELOPER_KEY)
 
     search_response = youtube.search().list(
         q=options.q,
@@ -23,7 +23,7 @@ def youtube_search(options):
         if search_result["id"]["kind"] == "youtube#video":
             videos.append("%s (%s)" % (search_result["snippet"]["title"], search_result["id"]["videoId"]))
 
-    print "Videos:¥n", "¥n".join(videos), "¥n"
+    print("Videos:¥n", "¥n".join(videos), "¥n")
 
 
 if __name__ == "__main__":
@@ -31,7 +31,9 @@ if __name__ == "__main__":
     argparser.add_argument("--max-result", help="Max results", default=25)
     args = argparser.parse_args()
 
+    print(args)
+
     try:
         youtube_search(args)
     except HttpError as e:
-        print "An HTTP error %d occurred:¥n%s" % (e.resp.status, e.content)
+        print("An HTTP error %d occurred:¥n%s" % (e.resp.status, e.content))
