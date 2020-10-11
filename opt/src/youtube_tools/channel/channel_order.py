@@ -4,7 +4,7 @@ from apiclient.discovery import build
 from apiclient.errors import HttpError
 from oauth2client.tools import argparser
 
-DEVELOPER_KEY = "APIKey"
+DEVELOPER_KEY = "apikey"
 YOUTUBE_API_SERVICE_NAME = "youtube"
 YOUTUBE_API_VERSION = "v3"
 
@@ -20,20 +20,27 @@ def youtube_search(options):
         channelId=options.channel_id,
         part="id,snippet",
         maxResults=options.max_results,
-        publishedAfter='2019-08-11T00:00:00Z',
-        order='date',
+        # videoDuration='long',
+        order='videoCount',
     ).execute()
 
-    print(search_response)
+    videos_titles = []
+    videos_updtime = []
 
-    videos = []
 
     for search_result in search_response.get("items", []):
         if search_result["id"]["kind"] == "youtube#video":
-            videos.append("%s" % search_result["snippet"]["title"])
+            videos_titles.append("%s->(https://www.youtube.com/watch?v=%s)" % (search_result["snippet"]["title"], search_result["id"]["videoId"]))
+            videos_updtime.append("%s" % search_result["snippet"]["publishedAt"])
 
-    for data in videos:
-        print(data)
+    d = dict(zip(videos_titles, videos_updtime))
+
+    dic2 = sorted(d.items(), key=lambda x:x[1])
+
+    print(dic2)
+
+
+
 
 
 if __name__ == "__main__":
@@ -42,7 +49,7 @@ if __name__ == "__main__":
     # channelIDパラメータ
     argparser.add_argument("--channel-id", help="Channel ID", default="UCCzUftO8KOVkV4wQG1vkUvg")
     # max_resultsパラメータ
-    argparser.add_argument("--max-results", help="Max results", default=25)
+    argparser.add_argument("--max-results", help="Max results", default=50)
     args = argparser.parse_args()
 
     try:
