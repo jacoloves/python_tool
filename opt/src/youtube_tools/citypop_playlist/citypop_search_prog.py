@@ -43,7 +43,7 @@ def video_duration_search(videoid):
     for video_result in video_list_res.get("items", []):
         videos_duraition = video_result['contentDetails']['duration']
 
-    videotime = iosparser.iosPraser.iso_parser(videos_duraition)
+    videotime = iosparser.iosParser.iso_parser(videos_duraition)
     return videotime
 
 def youtube_search(options):
@@ -62,9 +62,13 @@ def youtube_search(options):
     ).execute()
 
     videos_ids = []
+    videos_titles = []
+    videos_url = []
 
     for search_result in search_response.get("items", []):
         if search_result["id"]["kind"] == "youtube#video":
+            videos_titles.append("%s" % search_result["snippet"]["title"])
+            videos_url.append("https://www.youtube.com/watch?v=%s" % search_result["id"]["videoId"])
             videos_ids.append("%s" % search_result["id"]["videoId"])
 
     videotime_arr = []
@@ -72,8 +76,21 @@ def youtube_search(options):
         videotime = video_duration_search(videoid)
         videotime_arr.append(videotime)
 
-    for data in videotime_arr:
-        print(data)
+    df = pd.DataFrame(index=[], columns=[])
+
+    df["title"] = videos_titles
+    df["url"] = videos_url
+    df["video_time"] = videotime_arr
+
+    print(test_color.Color.GREEN + "♫ Let's Play CITYPOP ♫" + test_color.Color.END)
+    for title, url, video_time in zip(df['title'], df['url'], df['video_time']):
+        print(test_color.Color.PURPLE + "Now Playing is ♫♫" + test_color.Color.END)
+        print(test_color.Color.PURPLE + ("[%s] %s" % (title, video_time)) + test_color.Color.END)
+        webbrowser.open(url, new=1)
+        print(test_color.Color.RED + ("Press enter to listen to the next song!") + test_color.Color.END)
+        get_key = input()
+
+    print(test_color.Color.BLUE + ("Finished! See you later Zzz...") + test_color.Color.END)
 
 if __name__ == "__main__":
 

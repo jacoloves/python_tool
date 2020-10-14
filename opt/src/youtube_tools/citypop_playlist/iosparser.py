@@ -1,12 +1,18 @@
 #! /usr/bin/env python
 
-class iosPraser:
+import re
+
+class iosParser:
 
     def iso_parser(target_str):
-        target_str = target_str.replace('PT', '')
-        target_str = target_str.replace('H', ':')
-        target_str = target_str.replace('M', ':')
-        result_str = target_str.replace('S', '')
+        result_str = target_str.replace('PT', '')
+        result_str = result_str.replace('H', ':')
+        result_str = result_str.replace('M', ':')
+        result_str = result_str.replace('S', '')
+
+
+        if not re.search('S', target_str):
+            result_str = result_str + "00"
 
         return result_str
 
