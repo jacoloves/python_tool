@@ -10,4 +10,6 @@ while True:
     entire_list.append(num_list)
 
 for i in range(len(entire_list)):
-    print(entire_list[i])
+    ans_list = sorted(entire_list[i])
+    print(ans_list[0], ans_list[1])
+
